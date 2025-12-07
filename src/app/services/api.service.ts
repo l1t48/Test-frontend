@@ -8,7 +8,8 @@ import { environment } from '../environment/environment';
     providedIn: 'root'
 })
 export class ApiService {
-    private baseUrl = import.meta.env.VITE_apiBaseUrlLocal;
+    public baseUrl = import.meta.env.VITE_apiBaseUrlLocal;
+    public baseUrlLocalWitoutAPI = import.meta.env.VITE_BaseUrlLocalWitoutAPI;
 
     constructor(private http: HttpClient) { }
 
@@ -20,7 +21,6 @@ export class ApiService {
         // Remove withCredentials for registration to avoid parsing errors, and it is not needed anyway here because no cred is needed the user need to login
         return this.http.post(`${this.baseUrl}/auth/register`, data);
     }
-
 
     login(data: any): Observable<any> {
         return this.http.post(`${this.baseUrl}/auth/login`, data, { withCredentials: true });

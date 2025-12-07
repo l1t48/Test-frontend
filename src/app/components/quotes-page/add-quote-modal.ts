@@ -1,8 +1,9 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ApiService } from '../services/api.service';
+import { ApiService } from '../../services/api.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { SignalRService } from '../../services/signalr.service';
 
 declare const bootstrap: any; // bootstrap bundle must be loaded in index.html
 
@@ -36,10 +37,10 @@ declare const bootstrap: any; // bootstrap bundle must be loaded in index.html
           </div>
 
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" [disabled]="saving">Close</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" [disabled]="saving">Close <i class="fa-solid fa-xmark"></i></button>
 
             <button type="submit" class="btn btn-primary" [disabled]="saving">
-              <span *ngIf="!saving">Save</span>
+              <span *ngIf="!saving">Save <i class="fa-regular fa-floppy-disk"></i></span>
               <span *ngIf="saving" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
             </button>
           </div>
@@ -58,7 +59,7 @@ export class CreateQuoteModalComponent {
 
   @Output() created = new EventEmitter<any>();
 
-  constructor(private api: ApiService) {}
+  constructor(private api: ApiService, private signalR: SignalRService) {}
 
   onSave(e: Event) {
     e.preventDefault();
@@ -84,7 +85,7 @@ export class CreateQuoteModalComponent {
         this.saving = false;
         this.text = '';
         this.author = '';
-
+        this.signalR.refreshQuotes();
         // hide modal after short delay so user sees the success message
         setTimeout(() => {
           const el = document.getElementById('createQuoteModal');

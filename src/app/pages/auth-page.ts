@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { ApiService } from '../services/api.service';
 import { AuthStateService } from '../services/auth-state.service';
 import { Router } from '@angular/router';
+import { SignalRService } from '../services/signalr.service';
 
 @Component({
   selector: 'app-auth',
@@ -58,7 +59,7 @@ import { Router } from '@angular/router';
                 {{ loginMessage }}
               </h1>
 
-              <button class="btn btn-primary btn-lg w-100 mt-3" type="button" (click)="login()">Login</button>
+              <button class="btn btn-primary btn-lg w-100 mt-3" type="button" (click)="login()">Submit <i class="fa-solid fa-check"></i></button>
             </div>
 
             <!-- REGISTER -->
@@ -80,7 +81,7 @@ import { Router } from '@angular/router';
                 {{ registerMessage }}
               </h1>
 
-              <button class="btn btn-primary btn-lg w-100 mt-3" type="button" (click)="register()">Register</button>
+              <button class="btn btn-primary btn-lg w-100 mt-3" type="button" (click)="register()">Submit <i class="fa-solid fa-check"></i></button>
             </div>
 
           </div>
@@ -103,7 +104,7 @@ export class AuthPage {
   registerMessage = '';
   registerSuccess = false;
 
-  constructor(private api: ApiService, private authState: AuthStateService, private router: Router) { }
+  constructor(private api: ApiService, private authState: AuthStateService, private router: Router, private signalR: SignalRService ) { }
 
   login() {
     this.loginMessage = '';
@@ -119,6 +120,7 @@ export class AuthPage {
         this.api.getAuthMe().subscribe({
           next: user => {
             this.authState.setUser(user);
+            this.signalR['loadInitialQuotes']();
             this.router.navigate(['/books']);
           },
           error: () => console.warn('Could not fetch user info.')

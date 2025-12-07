@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ApiService } from '../services/api.service';
+import { ApiService } from '../../services/api.service';
 import { HttpErrorResponse } from '@angular/common/http';
 
 declare const bootstrap: any; // used to programmatically hide modal (Bootstrap bundle must be loaded)
@@ -48,11 +48,11 @@ declare const bootstrap: any; // used to programmatically hide modal (Bootstrap 
           </div>
 
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" [disabled]="saving">Close</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" [disabled]="saving">Close <i class="fa-solid fa-xmark"></i></button>
 
             <!-- We do NOT use data-bs-dismiss here so we can only close after success programmatically -->
             <button type="submit" class="btn btn-primary" [disabled]="saving">
-              <span *ngIf="!saving">Save</span>
+              <span *ngIf="!saving">Save <i class="fa-regular fa-floppy-disk"></i></span>
               <span *ngIf="saving" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
             </button>
           </div>

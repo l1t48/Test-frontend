@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgIf } from '@angular/common';
-import { AuthStateService } from '../services/auth-state.service';
+import { AuthStateService } from '../../services/auth-state.service';
 import { Router, NavigationEnd  } from '@angular/router';
-import { ApiService } from '../services/api.service';
+import { ApiService } from '../../services/api.service';
 import { filter } from 'rxjs'
 
 @Component({
