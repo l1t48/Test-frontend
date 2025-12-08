@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { SignalRService } from '../../services/signalr.service';
 import { ModalHelper } from '../../helper/modal-helper';
 
 declare const bootstrap: any;
@@ -66,7 +67,7 @@ export class EditBookModalComponent {
   errorMessage = '';
   successMessage = '';
 
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService,  private signalR: SignalRService) { }
 
   showModal() {
     ModalHelper.showModal('editBookModal');
@@ -95,6 +96,7 @@ export class EditBookModalComponent {
     }).subscribe({
       next: (res) => {
         this.successMessage = 'Book updated successfully.';
+        this.signalR.refreshBooks();
         this.saving = false;
 
         setTimeout(() => {

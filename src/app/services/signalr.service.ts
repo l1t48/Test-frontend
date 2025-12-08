@@ -85,7 +85,10 @@ export class SignalRService {
     });
   }
 
-  // You can create a clearer alias for a forced refresh
+  public refreshBooks() {
+    this.loadInitialBooks();
+  }
+
   public refreshQuotes() {
     this.loadInitialQuotes();
   }

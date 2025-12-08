@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ModalHelper } from '../../helper/modal-helper';
+import { SignalRService } from '../../services/signalr.service';
 
 declare const bootstrap: any; // used to programmatically hide modal (Bootstrap bundle must be loaded)
 
@@ -73,7 +74,7 @@ export class CreateBookModalComponent {
 
   @Output() created = new EventEmitter<{ id?: number; title: string; author: string; description?: string }>();
 
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService,  private signalR: SignalRService) { }
 
   showModal() {
     ModalHelper.showModal('createBookModal');
@@ -109,6 +110,7 @@ export class CreateBookModalComponent {
         this.created.emit(res);
 
         this.successMessage = 'Book created successfully.';
+        this.signalR.refreshBooks();
         this.saving = false;
 
         // clear inputs for next time

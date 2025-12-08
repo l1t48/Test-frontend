@@ -112,7 +112,10 @@ export class BooksListPage implements OnInit, AfterViewInit {
     if (!bookId) return;
     if (confirm('Are you sure you want to delete this book?')) {
       this.signalR.api.deleteBook(bookId).subscribe({
-        next: (res) => alert(res.message),
+        next: (res) =>{
+          this.signalR.refreshBooks();
+          alert(res.message);
+        },
         error: (err) => alert(err)
       });
     }
