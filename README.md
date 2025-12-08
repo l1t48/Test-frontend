@@ -29,43 +29,46 @@ To start a local development server: ``` ng serve ```. The application will be a
 To create a production-ready build: ``` ng build --configuration production ```. Compiles and optimizes the application into the dist/ folder.
 
 ## Project Structure
-.
-├── src
-│   ├── app
-│   │   ├── app.routes.ts           # Application routes
-│   │   ├── app.ts                  # Main Angular module
-│   │   ├── components
-│   │   │   ├── books-page
-│   │   │   │   ├── add-book-modal.ts   # Modal component to add a new book
-│   │   │   │   └── edit-book-modal.ts  # Modal component to edit an existing book
-│   │   │   ├── general
-│   │   │   │   ├── header.ts            # Header component with navigation
-│   │   │   │   └── theme-switcher.ts    # Dark/light theme toggle component
-│   │   │   └── quotes-page
-│   │   │       ├── add-quote-modal.ts   # Modal component to add a new quote
-│   │   │       └── edit-quote-modal.ts  # Modal component to edit an existing quote
-│   │   ├── environment
-│   │   │   ├── environment.prod.ts      # Production environment configuration
-│   │   │   └── environment.ts           # Development environment configuration
-│   │   ├── helper
-│   │   │   └── modal-helper.ts          # Helper functions for modal management
-│   │   ├── pages
-│   │   │   ├── auth-page.ts             # Login/register page
-│   │   │   ├── books-list-page.ts       # Page displaying a list of books
-│   │   │   └── quotes-list-page.ts      # Page displaying a list of quotes
-│   │   └── services
-│   │       ├── CredentialsInterceptor.ts # Interceptor for adding auth tokens to requests
-│   │       ├── api.service.ts            # API service for backend requests
-│   │       ├── auth-state.service.ts     # Tracks user authentication state
-│   │       ├── auth.guard.ts             # Route guard for protected routes
-│   │       └── signalr.service.ts        # Service for real-time updates using SignalR
-├── index.html                            # Main HTML entry point
-├── main.ts                               # Bootstrap file for Angular
-├── angular.json                          # Angular CLI configuration
-├── package.json                           # NPM dependencies and scripts
-├── tsconfig.json                          # TypeScript configuration
-└── public
-    └── literature.png                     # Sample image asset
+
+| Folder / File             | Description / Purpose                          |
+| ------------------------- | ---------------------------------------------- |
+| **src**                   | Source code                                    |
+| **app**                   | Main Angular application code                  |
+| app.routes.ts             | Application routes                             |
+| app.ts                    | Main Angular module                            |
+| **components**            | Reusable UI components                         |
+| books-page                | Components for books page                      |
+| add-book-modal.ts         | Modal component to add a new book              |
+| edit-book-modal.ts        | Modal component to edit an existing book       |
+| general                   | General-purpose components                     |
+| header.ts                 | Header component with navigation               |
+| theme-switcher.ts         | Dark/light theme toggle component              |
+| quotes-page               | Components for quotes page                     |
+| add-quote-modal.ts        | Modal component to add a new quote             |
+| edit-quote-modal.ts       | Modal component to edit an existing quote      |
+| **environment**           | Environment configurations                     |
+| environment.prod.ts       | Production environment configuration           |
+| environment.ts            | Development environment configuration          |
+| **helper**                | Helper utilities                               |
+| modal-helper.ts           | Helper functions for modal management          |
+| **pages**                 | Application pages                              |
+| auth-page.ts              | Login/register page                            |
+| books-list-page.ts        | Page displaying a list of books                |
+| quotes-list-page.ts       | Page displaying a list of quotes               |
+| **services**              | Services and business logic                    |
+| CredentialsInterceptor.ts | Interceptor for adding auth tokens to requests |
+| api.service.ts            | API service for backend requests               |
+| auth-state.service.ts     | Tracks user authentication state               |
+| auth.guard.ts             | Route guard for protected routes               |
+| signalr.service.ts        | Service for real-time updates using SignalR    |
+| index.html                | Main HTML entry point                          |
+| main.ts                   | Bootstrap file for Angular                     |
+| angular.json              | Angular CLI configuration                      |
+| package.json              | NPM dependencies and scripts                   |
+| tsconfig.json             | TypeScript configuration                       |
+| **public**                | Public assets                                  |
+| literature.png            | Sample image asset                             |
+
 
 ## Environment Configuration
 The frontend requires configuration to connect to the backend API and manage application settings.
