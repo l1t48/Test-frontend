@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, Input, AfterViewInit, ElementRef }from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { SignalRService } from '../../services/signalr.service';
 import { ModalHelper } from '../../helper/modal-helper';
+
 
 declare const bootstrap: any; // bootstrap bundle must be loaded in index.html
 
@@ -50,7 +51,7 @@ declare const bootstrap: any; // bootstrap bundle must be loaded in index.html
     </div>
   `
 })
-export class CreateQuoteModalComponent {
+export class CreateQuoteModalComponent implements AfterViewInit {
   text = '';
   author = '';
 
@@ -60,7 +61,23 @@ export class CreateQuoteModalComponent {
 
   @Output() created = new EventEmitter<any>();
 
-  constructor(private api: ApiService, private signalR: SignalRService) { }
+  constructor(private api: ApiService, private signalR: SignalRService, private el: ElementRef) { }
+
+  ngAfterViewInit() {
+        this.setupModalEventListeners();
+    }
+
+    setupModalEventListeners() {
+        // Get the modal DOM element reference
+        const modalElement = this.el.nativeElement.querySelector('.modal');
+        if (modalElement) {
+            // Attach listener for the Bootstrap 'hide' event
+            modalElement.addEventListener('hide.bs.modal', () => {
+                // Call the helper function to blur focus
+                ModalHelper.blurActiveElement(modalElement);
+            });
+        }
+    }
 
   showModal() {
     ModalHelper.showModal('createQuoteModal');

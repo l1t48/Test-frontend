@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Output, Input, AfterViewInit, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
@@ -60,14 +60,30 @@ interface Book {
   </div>
   `
 })
-export class EditBookModalComponent {
+export class EditBookModalComponent implements AfterViewInit {
   @Input() book: Book = { title: '', author: '', description: '' };
 
   saving = false;
   errorMessage = '';
   successMessage = '';
 
-  constructor(private api: ApiService,  private signalR: SignalRService) { }
+  constructor(private api: ApiService, private signalR: SignalRService, private el: ElementRef) { }
+
+  ngAfterViewInit() {
+    this.setupModalEventListeners();
+  }
+
+  setupModalEventListeners() {
+    // Get the modal DOM element reference
+    const modalElement = this.el.nativeElement.querySelector('.modal');
+    if (modalElement) {
+      // Attach listener for the Bootstrap 'hide' event
+      modalElement.addEventListener('hide.bs.modal', () => {
+        // Call the helper function to blur focus
+        ModalHelper.blurActiveElement(modalElement);
+      });
+    }
+  }
 
   showModal() {
     ModalHelper.showModal('editBookModal');

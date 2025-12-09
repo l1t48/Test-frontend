@@ -1,4 +1,7 @@
-# Book & Quotes Management Frontend
+# Book & Quotes Management Frontend 
+
+**Note for Testing/Deployment:**
+The backend service is currently hosted on a **free-tier service**. The server will "sleep" after a period of inactivity and requires time to wake up upon the first request. To ensure a smooth testing experience, please access the backend directly at [**https://test-backend-u24f.onrender.com/api/test**] and wait for a response **before** accessing the frontend. Avoid using browser anonymous mode because it won't work with the current cookie management setup.
 
 ## Introduction
 This is the frontend application for a book and quotes management system, built with Angular 20 and TypeScript. It provides a responsive and user-friendly interface for managing books and quotes, supporting authentication, CRUD 
@@ -26,7 +29,7 @@ Navigate to the project root and run: ``` npm install ```. This installs all req
 To start a local development server: ``` ng serve ```. The application will be available at http://localhost:4200 by default.
 
 ### Building for Production
-To create a production-ready build: ``` ng build --configuration production ```. Compiles and optimizes the application into the dist/ folder.
+To create a production-ready build: ``` ng build ```. Compiles and optimizes the application into the dist/ folder.
 
 ## Project Structure
 
