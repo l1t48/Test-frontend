@@ -88,7 +88,7 @@ export class ApiService {
     // TEST
     // --------------------
     getTest(): Observable<any> {
-        return this.http.get(`${this.baseUrl}/test`, { withCredentials: true });
+        return this.http.get(`${this.baseUrl}/test`);
     }
 
     postTest(data: any): Observable<any> {
