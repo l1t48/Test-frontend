@@ -92,4 +92,9 @@ export class SignalRService {
   public refreshQuotes() {
     this.loadInitialQuotes();
   }
+
+  public clearData() {
+    this.booksSubject.next([]);
+    this.quotesSubject.next([]);
+  }
 }

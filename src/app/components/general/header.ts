@@ -80,6 +80,7 @@ export class HeaderComponent {
       next: () => {
         this.auth.clear();          // Clear user state
         this.signalR.stopConnection();   // Stop any active SignalR connections
+        this.signalR.clearData();
         this.router.navigate(['/auth']); // Redirect to login
       },
       error: () => {
