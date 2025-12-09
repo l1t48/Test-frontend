@@ -5,6 +5,7 @@ import { ApiService } from '../services/api.service';
 import { AuthStateService } from '../services/auth-state.service';
 import { Router } from '@angular/router';
 import { SignalRService } from '../services/signalr.service';
+import { environment } from '../environment/environment.prod';
 
 @Component({
   selector: 'app-auth',
@@ -120,7 +121,7 @@ export class AuthPage {
         this.api.getAuthMe().subscribe({
           next: user => {
             this.authState.setUser(user);
-            this.signalR['loadInitialQuotes']();
+            this.signalR.startConnection(environment.baseUrlWithoutAPI); 
             this.router.navigate(['/books']);
           },
           error: () => console.warn('Could not fetch user info.')

@@ -18,7 +18,10 @@ export class SignalRService {
   constructor(public api: ApiService) { }
 
   startConnection(baseUrl: string) {
-    if (this.hubConnection) return;
+    if (this.hubConnection) {
+      this.stopConnection();
+      this.clearData();
+    }
 
     this.hubConnection = new signalR.HubConnectionBuilder()
       .withUrl(`${baseUrl}/hubs/notifications`, { withCredentials: true })
