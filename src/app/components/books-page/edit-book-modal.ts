@@ -25,7 +25,7 @@ interface Book {
       <form class="modal-content" (submit)="onSave($event)" novalidate>
         <div class="modal-header">
           <h5 class="modal-title" id="editBookModalLabel">Edit Book</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeModal()"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
 
         <div class="modal-body">
@@ -49,7 +49,7 @@ interface Book {
         </div>
 
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" [disabled]="saving" (click)="closeModal()">Close <i class="fa-solid fa-xmark"></i></button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" [disabled]="saving">Close <i class="fa-solid fa-xmark"></i></button>
           <button type="submit" class="btn btn-primary" [disabled]="saving">
             <span *ngIf="!saving">Save <i class="fa-regular fa-floppy-disk"></i></span>
             <span *ngIf="saving" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>

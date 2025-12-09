@@ -19,7 +19,7 @@ declare const bootstrap: any; // bootstrap bundle must be loaded in index.html
         <form class="modal-content" (submit)="onSave($event)" novalidate>
           <div class="modal-header">
             <h5 class="modal-title" id="createQuoteModalLabel">Create a new quote</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" [disabled]="saving" (click)="closeModal()"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" [disabled]="saving"></button>
           </div>
 
           <div class="modal-body">
@@ -38,7 +38,7 @@ declare const bootstrap: any; // bootstrap bundle must be loaded in index.html
           </div>
 
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" [disabled]="saving" (click)="closeModal()">Close <i class="fa-solid fa-xmark"></i></button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" [disabled]="saving">Close <i class="fa-solid fa-xmark"></i></button>
 
             <button type="submit" class="btn btn-primary" [disabled]="saving">
               <span *ngIf="!saving">Save <i class="fa-regular fa-floppy-disk"></i></span>

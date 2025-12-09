@@ -19,7 +19,7 @@ declare const bootstrap: any; // used to programmatically hide modal (Bootstrap 
         <form class="modal-content" (submit)="onSave($event)" novalidate>
           <div class="modal-header">
             <h5 class="modal-title" id="createBookModalLabel">Create a new book</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeModal()"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
 
           <div class="modal-body">
@@ -50,7 +50,7 @@ declare const bootstrap: any; // used to programmatically hide modal (Bootstrap 
           </div>
 
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" [disabled]="saving" (click)="closeModal()">Close <i class="fa-solid fa-xmark"></i></button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" [disabled]="saving">Close <i class="fa-solid fa-xmark"></i></button>
 
             <!-- We do NOT use data-bs-dismiss here so we can only close after success programmatically -->
             <button type="submit" class="btn btn-primary" [disabled]="saving">
