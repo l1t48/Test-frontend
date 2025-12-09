@@ -12,60 +12,56 @@ import { CommonModule } from '@angular/common';
   selector: 'app-root',
   imports: [CommonModule, RouterOutlet, ThemeSwitcher, HeaderComponent],
   template: `
-    <!-- ✅ FULL SCREEN SPINNER -->
-    <div *ngIf="isWakingUp" 
-         class="vh-100 d-flex flex-column justify-content-center align-items-center bg-body text-body">
-      
-      <div class="spinner-border mb-3" role="status"></div>
-      <h5>Waking up server...</h5>
-      <small class="opacity-75">This may take up to 30 seconds</small>
+    <app-header></app-header>
+
+    <!-- ✅ LOADING STATE -->
+    <div *ngIf="isLoading" class="vh-100 d-flex flex-column justify-content-center align-items-center">
+      <div class="spinner-border mb-3"></div>
+      <h5>Starting server...</h5>
     </div>
 
-    <!-- ✅ NORMAL APP -->
-    <ng-container *ngIf="!isWakingUp">
-      <app-header></app-header>
-      <div class="bg-body text-body">
-        <router-outlet></router-outlet>
-      </div>
+    <!-- ✅ APP RENDERS ONLY AFTER TEST SUCCESS -->
+    <div *ngIf="!isLoading" class="bg-body text-body">
+      <router-outlet></router-outlet>
+    </div>
 
-      <app-sticky-button></app-sticky-button>
-    </ng-container>
+    <app-sticky-button></app-sticky-button>
   `
 })
 export class App implements OnInit {
 
-  isWakingUp = true;   // ✅ controls spinner
+  isLoading = true;
 
   constructor(
     private authState: AuthStateService,
     private api: ApiService,
     private router: Router,
     private signalR: SignalRService
-  ) {}
+  ) { }
 
   ngOnInit() {
-    this.wakeUpBackend();
+    this.waitForBackend();
   }
 
-  // ✅ Render Wake-up Logic
-  private wakeUpBackend() {
+  /** ✅ ONLY responsibility: unlock app when backend wakes */
+  private waitForBackend() {
     this.api.getTest().subscribe({
       next: () => {
-        console.log('Backend awake ✅');
-        this.isWakingUp = false;
+        // ✅ Backend is awake → unlock app
+        this.isLoading = false;
         this.initializeAuthState();
         setInterval(() => this.initializeAuthState(), 60_000);
       },
       error: () => {
-        console.log('Still waking up... retrying');
-        setTimeout(() => this.wakeUpBackend(), 3000); // retry every 3s
+        // ❌ Backend still asleep → stay loading (no redirect, no crash)
+        setTimeout(() => this.waitForBackend(), 3000);
       }
     });
   }
 
   private initializeAuthState() {
     this.api.getAuthMe().subscribe({
-      next: user => {
+      next: user =>{
         this.authState.setUser(user);
         this.signalR.startConnection(this.api.baseUrlLocalWitoutAPI); 
       },
