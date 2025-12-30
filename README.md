@@ -1,7 +1,7 @@
-# Book & Quotes Management Frontend 
+# Book & Quotes Management Frontend
 
-**Note for Testing/Deployment:**
-The backend service is currently hosted on a **free-tier service**. The server will "sleep" after a period of inactivity and requires time to wake up upon the first request. To ensure a smooth testing experience, please access the backend directly at [**https://test-backend-u24f.onrender.com/api/test**] and wait for a response **before** accessing the frontend. Avoid using browser anonymous mode because it won't work with the current cookie management setup.
+**Note:**
+This project was previously deployed online. However, due to limitations of the free hosting plan, the database expired, and the deployment was subsequently taken down.
 
 ## Introduction
 This is the frontend application for a book and quotes management system, built with Angular 20 and TypeScript. It provides a responsive and user-friendly interface for managing books and quotes, supporting authentication, CRUD 
@@ -102,3 +102,4 @@ The following table summarizes all frontend functionality tests conducted to ens
 | **Bootstrap & Font Awesome**             | Check forms, buttons, icons                            | ✅ Bootstrap elements and icons display correctly     |
 | **Extra Challenge - Light/Dark Mode**    | Toggle between light and dark theme                    | ✅ Light/Dark mode button works correctly             |
 | **API Text Validation**                  | Invalid inputs tested against backend                  | ✅ Correct error messages returned for all test cases |
+
