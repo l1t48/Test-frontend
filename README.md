@@ -103,6 +103,3 @@ The following table summarizes all frontend functionality tests conducted to ens
 | **Extra Challenge - Light/Dark Mode**    | Toggle between light and dark theme                    | ✅ Light/Dark mode button works correctly             |
 | **API Text Validation**                  | Invalid inputs tested against backend                  | ✅ Correct error messages returned for all test cases |
 
-
-## License
-This project is licensed under the MIT License. See the LICENSE file for details.
